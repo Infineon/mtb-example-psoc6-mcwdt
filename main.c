@@ -1,14 +1,14 @@
 /******************************************************************************
 * File Name:   main.c
-*
+
 * Description: This is the source code for the PSoC 6 MCU Multi-Counter Watchdog
-*              Timer (MCWDT) Example for ModusToolbox.
+*              Timer (MCWDT) Example.
 *
-* Related Document: See Readme.md
+* Related Document: See README.md
 *
 *
 *******************************************************************************
-* (c) 2019, Cypress Semiconductor Corporation. All rights reserved.
+* (c) 2019-2020, Cypress Semiconductor Corporation. All rights reserved.
 *******************************************************************************
 * This software, including source code, documentation and related materials
 * ("Software"), is owned by Cypress Semiconductor Corporation or one of its
@@ -39,7 +39,6 @@
 * indemnify Cypress against all liability.
 *******************************************************************************/
 
-#include "cy_pdl.h"
 #include "cyhal.h"
 #include "cybsp.h"
 #include "cy_retarget_io.h"
@@ -95,6 +94,26 @@ int main(void)
 
     /* Initialize the device and board peripherals */
     result = cybsp_init() ;
+
+    /* BSP initialization failed. Stop program execution */
+    if (result != CY_RSLT_SUCCESS)
+    {
+        CY_ASSERT(0);
+    }
+
+    /* Initialize the User LED */
+    result = cyhal_gpio_init(CYBSP_USER_LED, CYHAL_GPIO_DIR_OUTPUT, CYHAL_GPIO_DRIVE_STRONG, CYBSP_LED_STATE_OFF);
+
+    /* GPIO initialization failed. Stop program execution */
+    if (result != CY_RSLT_SUCCESS)
+    {
+        CY_ASSERT(0);
+    }
+
+    /* Initialize the User button */
+    result = cyhal_gpio_init(CYBSP_USER_BTN, CYHAL_GPIO_DIR_INPUT, CYHAL_GPIO_DRIVE_PULLUP, 1);
+
+    /* GPIO initialization failed. Stop program execution */
     if (result != CY_RSLT_SUCCESS)
     {
         handle_error();
@@ -104,29 +123,13 @@ int main(void)
     __enable_irq();
 
     /* Initialize retarget-io to use the debug UART port */
-    result = cy_retarget_io_init(CYBSP_DEBUG_UART_TX, CYBSP_DEBUG_UART_RX, \
-                                 CY_RETARGET_IO_BAUDRATE);
+    result = cy_retarget_io_init(CYBSP_DEBUG_UART_TX, CYBSP_DEBUG_UART_RX, CY_RETARGET_IO_BAUDRATE);
 
-    /* retarget-io init failed. Stop program execution */
+    /* retarget-io initialization failed. Stop program execution */
     if (result != CY_RSLT_SUCCESS)
     {
-        CY_ASSERT(0);
+        handle_error();
     }
-
-    /* Initialize the User LED */
-    result = cyhal_gpio_init((cyhal_gpio_t) CYBSP_USER_LED, \
-              CYHAL_GPIO_DIR_OUTPUT, CYHAL_GPIO_DRIVE_STRONG, \
-              CYBSP_LED_STATE_OFF);
-
-    /* gpio init failed. Stop program execution */
-    if (result != CY_RSLT_SUCCESS)
-    {
-        CY_ASSERT(0);
-    }
-
-    /* Initialize the User button */
-    cyhal_gpio_init((cyhal_gpio_t) CYBSP_USER_BTN, CYHAL_GPIO_DIR_INPUT, \
-                                 CYHAL_GPIO_DRIVE_PULLUP, 1);
 
     /* Initialize MCWDT using lptimer HAL APIs */
     /* Default configuration of MCWDT is used */
@@ -134,6 +137,8 @@ int main(void)
     /* - Counter0 and Counter1 are set in interrupt mode - this feature not used in this CE */
     /* - WCO is the input clock source (configured in the earlier function call - cybsp_init()) */
     result = cyhal_lptimer_init(&lptimerObj);
+
+    /* LPTIMER initialization failed. Stop program execution */
     if (result != CY_RSLT_SUCCESS)
     {
         handle_error();
@@ -208,7 +213,7 @@ uint32_t read_switch_status(void)
     while(0UL == cyhal_gpio_read(CYBSP_USER_BTN))
     {
         /* Switch is pressed. Proceed for debouncing. */
-        Cy_SysLib_Delay(SWITCH_DEBOUNCE_CHECK_UNIT);
+        cyhal_system_delay_ms(SWITCH_DEBOUNCE_CHECK_UNIT);
         ++delayCounter;
 
         /* Keep checking the switch status till the switch is pressed for a
@@ -227,7 +232,7 @@ uint32_t read_switch_status(void)
 
                 while(delayCounter < SWITCH_DEBOUNCE_MAX_PERIOD_UNITS)
                 {
-                    Cy_SysLib_Delay(SWITCH_DEBOUNCE_CHECK_UNIT);
+                    cyhal_system_delay_ms(SWITCH_DEBOUNCE_CHECK_UNIT);
                     ++delayCounter;
                 }
 
