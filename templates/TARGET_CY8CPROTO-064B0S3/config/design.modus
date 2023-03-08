@@ -191,6 +191,7 @@
                     <Personality template="fll" version="4.0">
                         <Param id="configuration" value="auto"/>
                         <Param id="desiredFrequency" value="100.000"/>
+                        <Param id="enableOutputDivider" value="false"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].hfclk[0]">
@@ -261,10 +262,10 @@
                     <Alias value="MCWDT_0"/>
                     <Personality template="mcwdt" version="3.0">
                         <Param id="C0ClearOnMatch" value="FREE_RUNNING"/>
-                        <Param id="C0Match" value="32768"/>
+                        <Param id="C0Match" value="65535"/>
                         <Param id="C0Mode" value="CY_MCWDT_MODE_NONE"/>
                         <Param id="C1ClearOnMatch" value="FREE_RUNNING"/>
-                        <Param id="C1Match" value="32768"/>
+                        <Param id="C1Match" value="65535"/>
                         <Param id="C1Mode" value="CY_MCWDT_MODE_NONE"/>
                         <Param id="C2Mode" value="CY_MCWDT_MODE_NONE"/>
                         <Param id="C2Period" value="16"/>

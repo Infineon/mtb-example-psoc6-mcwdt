@@ -3,6 +3,13 @@
     <Devices>
         <Device mpn="CYBLE-416045-02/CYBLE-416045-02-device">
             <BlockConfig>
+                <Block location="bless[0]">
+                    <Alias value="CYBSP_BLE"/>
+                    <Personality template="mxs40ble" version="1.1">
+                        <Param id="BleSharing" value="0"/>
+                        <Param id="ExtPaLnaEnable" value="false"/>
+                    </Personality>
+                </Block>
                 <Block location="cpuss[0].dap[0]">
                     <Personality template="dap" version="2.0">
                         <Param id="dbgMode" value="SWD"/>
@@ -142,12 +149,13 @@
                 <Block location="srss[0].clock[0].fll[0]">
                     <Personality template="fll" version="4.0">
                         <Param id="configuration" value="auto"/>
-                        <Param id="desiredFrequency" value="48.000"/>
+                        <Param id="desiredFrequency" value="100.000"/>
+                        <Param id="enableOutputDivider" value="false"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].hfclk[0]">
                     <Personality template="hfclk" version="3.0">
-                        <Param id="sourceClockNumber" value="1"/>
+                        <Param id="sourceClockNumber" value="0"/>
                         <Param id="divider" value="1"/>
                     </Personality>
                 </Block>
@@ -193,14 +201,14 @@
                 </Block>
                 <Block location="srss[0].clock[0].periclk[0]">
                     <Personality template="periclk" version="2.0">
-                        <Param id="divider" value="2"/>
+                        <Param id="divider" value="1"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].pll[0]">
                     <Personality template="pll" version="3.0">
                         <Param id="lowFrequencyMode" value="false"/>
                         <Param id="configuration" value="auto"/>
-                        <Param id="desiredFrequency" value="144.000"/>
+                        <Param id="desiredFrequency" value="48.000"/>
                         <Param id="optimization" value="MinPower"/>
                     </Personality>
                 </Block>
@@ -223,10 +231,10 @@
                     <Alias value="MCWDT_0"/>
                     <Personality template="mcwdt" version="3.0">
                         <Param id="C0ClearOnMatch" value="FREE_RUNNING"/>
-                        <Param id="C0Match" value="32768"/>
+                        <Param id="C0Match" value="65535"/>
                         <Param id="C0Mode" value="CY_MCWDT_MODE_NONE"/>
                         <Param id="C1ClearOnMatch" value="FREE_RUNNING"/>
-                        <Param id="C1Match" value="32768"/>
+                        <Param id="C1Match" value="65535"/>
                         <Param id="C1Mode" value="CY_MCWDT_MODE_NONE"/>
                         <Param id="C2Mode" value="CY_MCWDT_MODE_NONE"/>
                         <Param id="C2Period" value="16"/>

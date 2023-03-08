@@ -10,6 +10,41 @@
                         <Param id="traceModeSerial" value="false"/>
                     </Personality>
                 </Block>
+                <Block location="csd[0].csd[0]">
+                    <Alias value="CYBSP_CSD"/>
+                    <Personality template="mxs40csd" version="3.0">
+                        <Param id="CapSenseEnable" value="true"/>
+                        <Param id="CapSenseCore" value="4"/>
+                        <Param id="SensorCount" value="8"/>
+                        <Param id="CapacitorCount" value="1"/>
+                        <Param id="SensorName0" value="Cmod"/>
+                        <Param id="SensorName1" value="Button0_Sns0"/>
+                        <Param id="SensorName2" value="Button1_Sns0"/>
+                        <Param id="SensorName3" value="LinearSlider0_Sns0"/>
+                        <Param id="SensorName4" value="LinearSlider0_Sns1"/>
+                        <Param id="SensorName5" value="LinearSlider0_Sns2"/>
+                        <Param id="SensorName6" value="LinearSlider0_Sns3"/>
+                        <Param id="SensorName7" value="LinearSlider0_Sns4"/>
+                        <Param id="CapSenseConfigurator" value="0"/>
+                        <Param id="CapSenseTuner" value="0"/>
+                        <Param id="CsdAdcEnable" value="false"/>
+                        <Param id="numChannels" value="1"/>
+                        <Param id="resolution" value="CY_CSDADC_RESOLUTION_10BIT"/>
+                        <Param id="range" value="CY_CSDADC_RANGE_VDDA"/>
+                        <Param id="acqTime" value="10"/>
+                        <Param id="autoCalibrInterval" value="30"/>
+                        <Param id="vref" value="-1"/>
+                        <Param id="operClkDivider" value="1"/>
+                        <Param id="azTime" value="5"/>
+                        <Param id="csdInitTime" value="25"/>
+                        <Param id="inFlash" value="true"/>
+                        <Param id="CsdIdacEnable" value="false"/>
+                        <Param id="CsdIdacAselect" value="CY_CSDIDAC_GPIO"/>
+                        <Param id="CsdIdacBselect" value="CY_CSDIDAC_DISABLED"/>
+                        <Param id="csdIdacInitTime" value="25"/>
+                        <Param id="idacInFlash" value="true"/>
+                    </Personality>
+                </Block>
                 <Block location="ioss[0].port[0].pin[0]">
                     <Alias value="CYBSP_WCO_IN"/>
                     <Personality template="pin" version="3.0">
@@ -144,7 +179,7 @@
                     <Alias value="CYBSP_I2C_SDA"/>
                 </Block>
                 <Block location="ioss[0].port[6].pin[6]">
-                    <Alias value="SWDIO"/>
+                    <Alias value="CYBSP_SWDIO"/>
                     <Personality template="pin" version="3.0">
                         <Param id="DriveModes" value="CY_GPIO_DM_PULLUP"/>
                         <Param id="initialState" value="1"/>
@@ -159,7 +194,7 @@
                     </Personality>
                 </Block>
                 <Block location="ioss[0].port[6].pin[7]">
-                    <Alias value="SWCLK"/>
+                    <Alias value="CYBSP_SWDCK"/>
                     <Personality template="pin" version="3.0">
                         <Param id="DriveModes" value="CY_GPIO_DM_PULLDOWN"/>
                         <Param id="initialState" value="1"/>
@@ -175,6 +210,7 @@
                 </Block>
                 <Block location="ioss[0].port[7].pin[0]">
                     <Alias value="CYBSP_CSD_SLD0"/>
+                    <Alias value="CYBSP_CS_SLD0"/>
                     <Personality template="pin" version="3.0">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -190,6 +226,7 @@
                 </Block>
                 <Block location="ioss[0].port[7].pin[1]">
                     <Alias value="CYBSP_CSD_SLD1"/>
+                    <Alias value="CYBSP_CS_SLD1"/>
                     <Personality template="pin" version="3.0">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -205,6 +242,7 @@
                 </Block>
                 <Block location="ioss[0].port[7].pin[2]">
                     <Alias value="CYBSP_CSD_SLD2"/>
+                    <Alias value="CYBSP_CS_SLD2"/>
                     <Personality template="pin" version="3.0">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -220,6 +258,7 @@
                 </Block>
                 <Block location="ioss[0].port[7].pin[3]">
                     <Alias value="CYBSP_CSD_SLD3"/>
+                    <Alias value="CYBSP_CS_SLD3"/>
                     <Personality template="pin" version="3.0">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -250,6 +289,7 @@
                 </Block>
                 <Block location="ioss[0].port[8].pin[0]">
                     <Alias value="CYBSP_CSD_BTN0"/>
+                    <Alias value="CYBSP_CS_BTN0"/>
                     <Personality template="pin" version="3.0">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -265,6 +305,7 @@
                 </Block>
                 <Block location="ioss[0].port[8].pin[1]">
                     <Alias value="CYBSP_CSD_BTN1"/>
+                    <Alias value="CYBSP_CS_BTN1"/>
                     <Personality template="pin" version="3.0">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -280,6 +321,7 @@
                 </Block>
                 <Block location="ioss[0].port[9].pin[0]">
                     <Alias value="CYBSP_CSD_SLD4"/>
+                    <Alias value="CYBSP_CS_SLD4"/>
                     <Personality template="pin" version="3.0">
                         <Param id="DriveModes" value="CY_GPIO_DM_ANALOG"/>
                         <Param id="initialState" value="1"/>
@@ -301,6 +343,7 @@
                 </Block>
                 <Block location="peri[0].div_8[0]">
                     <Alias value="CYBSP_CSD_CLK_DIV"/>
+                    <Alias value="CYBSP_CS_CLK_DIV"/>
                     <Personality template="pclk" version="3.0">
                         <Param id="intDivider" value="256"/>
                         <Param id="fracDivider" value="0"/>
@@ -325,12 +368,13 @@
                 <Block location="srss[0].clock[0].fll[0]">
                     <Personality template="fll" version="4.0">
                         <Param id="configuration" value="auto"/>
-                        <Param id="desiredFrequency" value="48.000"/>
+                        <Param id="desiredFrequency" value="100.000"/>
+                        <Param id="enableOutputDivider" value="false"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].hfclk[0]">
                     <Personality template="hfclk" version="3.0">
-                        <Param id="sourceClockNumber" value="1"/>
+                        <Param id="sourceClockNumber" value="0"/>
                         <Param id="divider" value="1"/>
                     </Personality>
                 </Block>
@@ -376,14 +420,14 @@
                 </Block>
                 <Block location="srss[0].clock[0].periclk[0]">
                     <Personality template="periclk" version="2.0">
-                        <Param id="divider" value="2"/>
+                        <Param id="divider" value="1"/>
                     </Personality>
                 </Block>
                 <Block location="srss[0].clock[0].pll[0]">
                     <Personality template="pll" version="3.0">
                         <Param id="lowFrequencyMode" value="false"/>
                         <Param id="configuration" value="auto"/>
-                        <Param id="desiredFrequency" value="144.000"/>
+                        <Param id="desiredFrequency" value="48.000"/>
                         <Param id="optimization" value="MinPower"/>
                     </Personality>
                 </Block>
@@ -406,10 +450,10 @@
                     <Alias value="MCWDT_0"/>
                     <Personality template="mcwdt" version="3.0">
                         <Param id="C0ClearOnMatch" value="FREE_RUNNING"/>
-                        <Param id="C0Match" value="32768"/>
+                        <Param id="C0Match" value="65535"/>
                         <Param id="C0Mode" value="CY_MCWDT_MODE_NONE"/>
                         <Param id="C1ClearOnMatch" value="FREE_RUNNING"/>
-                        <Param id="C1Match" value="32768"/>
+                        <Param id="C1Match" value="65535"/>
                         <Param id="C1Mode" value="CY_MCWDT_MODE_NONE"/>
                         <Param id="C2Mode" value="CY_MCWDT_MODE_NONE"/>
                         <Param id="C2Period" value="16"/>
@@ -450,6 +494,10 @@
                     <Port name="ioss[0].port[6].pin[6].digital_inout[0]"/>
                 </Net>
                 <Net>
+                    <Port name="csd[0].csd[0].clock[0]"/>
+                    <Port name="peri[0].div_8[0].clk[0]"/>
+                </Net>
+                <Net>
                     <Port name="ioss[0].port[0].pin[0].analog[0]"/>
                     <Port name="srss[0].clock[0].wco[0].wco_in[0]"/>
                 </Net>
@@ -457,10 +505,45 @@
                     <Port name="ioss[0].port[0].pin[1].analog[0]"/>
                     <Port name="srss[0].clock[0].wco[0].wco_out[0]"/>
                 </Net>
+                <Mux name="sense" location="csd[0].csd[0]">
+                    <Arm>
+                        <Port name="ioss[0].port[7].pin[7].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[8].pin[0].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[8].pin[1].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[7].pin[0].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[7].pin[1].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[7].pin[2].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[7].pin[3].analog[0]"/>
+                    </Arm>
+                    <Arm>
+                        <Port name="ioss[0].port[9].pin[0].analog[0]"/>
+                    </Arm>
+                </Mux>
             </Netlist>
         </Device>
         <Device mpn="LBEE5KL1DX/CYW4343WKUBG">
-            <BlockConfig/>
+            <BlockConfig>
+                <Block location="bt[0].power[0]">
+                    <Personality template="connectivity_bt" version="1.0">
+                        <Param id="hostWakePin" value=""/>
+                        <Param id="hostWakeIrqEvent" value="CYCFG_BT_WAKE_EVENT_ACTIVE_LOW"/>
+                        <Param id="devWakePin" value=""/>
+                        <Param id="devWakePolarity" value="CYCFG_BT_WAKE_EVENT_ACTIVE_LOW"/>
+                    </Personality>
+                </Block>
+            </BlockConfig>
             <Netlist/>
         </Device>
     </Devices>

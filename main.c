@@ -8,7 +8,7 @@
 *
 *
 *******************************************************************************
-* Copyright 2019-2022, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2019-2023, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -92,6 +92,14 @@ int main(void)
 {
     cy_rslt_t result;
     cy_en_mcwdt_status_t mcwdt_init_status = CY_MCWDT_SUCCESS;
+
+#if defined(CY_DEVICE_SECURE)
+    cyhal_wdt_t wdt_obj;
+    /* Clear watchdog timer so that it doesn't trigger a reset */
+    result = cyhal_wdt_init(&wdt_obj, cyhal_wdt_get_max_timeout_ms());
+    CY_ASSERT(CY_RSLT_SUCCESS == result);
+    cyhal_wdt_free(&wdt_obj);
+#endif
 
     /* Switch press event count value */
     uint32_t event1_cnt, event2_cnt;
