@@ -8,7 +8,7 @@
 *
 *
 *******************************************************************************
-* Copyright 2019-2023, Cypress Semiconductor Corporation (an Infineon company) or
+* Copyright 2019-2024, Cypress Semiconductor Corporation (an Infineon company) or
 * an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 *
 * This software, including source code, documentation and related
@@ -106,7 +106,7 @@ int main(void)
     uint32_t counter1_value, counter0_value;
 
     /* The time between two presses of switch */
-    uint32_t timegap;
+    volatile uint32_t timegap;
 
     /* Initialize the device and board peripherals */
     result = cybsp_init() ;
